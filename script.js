@@ -39,22 +39,23 @@ function separarDatos(text){
     });
     Persona.Direccion=CadenaLimpia.trim();
 
-    // let Provincia=ResponseSpliteada[3].trim()
-    // Provincia=Provincia.split(',')
-    // let CodigoPostal=Provincia[0].split(':')
-    // Provincia=Provincia[1].split(" ")
-    // CadenaLimpia=""
-    // Provincia.forEach(palabra => {
-    //     if(!palabra.includes("Final") || !palabra.includes("Consumidor")){
-    //         console.log(palabra);
-    //         CadenaLimpia=CadenaLimpia+' '+palabra
-    //     }
-    // })
-    // Persona.Provincia=CadenaLimpia.trim();
+    let Provincia=ResponseSpliteada[3].trim()
+    Provincia=Provincia.split(',')
+    let CodigoPostal=Provincia[0].split(':')
+    Provincia=Provincia[1].split(" ")
+    CadenaLimpia=""
+    Provincia.forEach(palabra => {
+        if(!palabra.includes("Final") || !palabra.includes("Consumidor")){
+            console.log(palabra);
+            CadenaLimpia=CadenaLimpia+' '+palabra
+        }
+    })
+    Persona.Provincia=CadenaLimpia.trim();
     
-    // CodigoPostal=CodigoPostal[1].trim()
-    // Persona.CodigoPostal=CodigoPostal
-    // MostrarDatos(Persona);    
+    CodigoPostal=CodigoPostal[1].trim()
+    Persona.CodigoPostal=CodigoPostal
+    console.log(Persona);
+    MostrarDatos(Persona);    
 }
 
 function MostrarDatos(Persona){
