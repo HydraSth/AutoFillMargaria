@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "App autocompletado",
+  "description": "Esta app ayuda al programa de Guillermo",
+  "version": "0.01",
+  "permissions": ["activeTab"],
+  "content_scripts": [
+	{
+	  "matches": ["https://www.onlineocr.net/account/login"],
+	  "js": ["content-script.js"]
+	}
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "128": "icon128.png"
+  }
+}
