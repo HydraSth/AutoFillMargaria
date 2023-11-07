@@ -6,7 +6,7 @@
   "permissions": ["activeTab"],
   "content_scripts": [
 	{
-	  "matches": ["https://www.onlineocr.net/account/login"],
+	  "matches": ["https://margarianeumaticos.gestionnik.com/Forms/Procesos/ComprVenta.php?TipoComp=FV"],
 	  "js": ["content-script.js"]
 	}
   ],
