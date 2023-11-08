@@ -7,9 +7,21 @@ let Persona={
     Departamento:"",
 }
 
-let text = ""
+let text = document.getElementById("TextoCompilar");
+
+window.onload=()=>{
+    localStorage.getItem("text")?
+    text.value=localStorage.getItem("text")
+    :
+    ""
+}
+
+text.addEventListener("keyup", ()=>{
+    localStorage.setItem("text",text.value)
+})
+
 document.getElementById("BtnProcesar").addEventListener("click", ()=>{
-    text=document.getElementById("TextoCompilar").value;
+    text=text.value
     let ResponseSpliteada=text.split(' ')
     let ElementoTipoCliente=document.getElementById("RCli")
     if(ResponseSpliteada.includes('cuit')){
@@ -46,7 +58,6 @@ function separarDatos(text){
     CadenaLimpia=""
     Provincia.forEach(palabra => {
         if(!palabra.includes("Final") || !palabra.includes("Consumidor")){
-            console.log(palabra);
             CadenaLimpia=CadenaLimpia+' '+palabra
         }
     })
@@ -55,6 +66,24 @@ function separarDatos(text){
     CodigoPostal=CodigoPostal[1].trim()
     Persona.CodigoPostal=CodigoPostal
     
+    // En el script de la extensión (fondo)
+    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+        var activeTab = tabs[0];
+        if (activeTab) {
+        chrome.tabs.sendMessage(activeTab.id, { data: Persona }, function(response) {
+            if (chrome.runtime.lastError) {
+             console.error(chrome.runtime.lastError);
+            } else {
+                // Manejar la respuesta si la hay
+                console.log(response);
+            }
+        });
+        } else {
+            console.error("No se encontró una pestaña activa.");
+        }
+    });
+
+    localStorage.setItem("Persona",JSON.stringify(Persona))
     MostrarDatos(Persona);    
 }
 
