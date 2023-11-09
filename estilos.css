@@ -11,31 +11,56 @@ body {
 	font-size: 15px;
 }
 
+#NombreVendedor{
+	margin: 5px 0px;
+	width: 100%;
+	text-align: center;
+
+}
+
+button:hover{
+	background-color: #447cb4;
+	color: #ccc;
+	transition: all 0.5s ease-in-out;
+}
+
 .fs-px12{
 	text-align: center;
 	font-size: 12.5px;
 }
 
-#container{
-	min-width: 380px;
+#MainContainer{
 	display: flex;
-	justify-content: center;
-	align-items: center;
 }
+
+#Producto{
+	margin-right: 30px;
+	background-color: #fff;
+	border-radius: 5px;
+	color: #2c5e90;
+	text-align: center;
+    padding: 0;
+}
+
+#Producto h2{
+	margin: 10px 0 0 0;
+}
+
 input, input:focus-visible {
     outline: none;
 	border-radius: 25px;
-	padding: 2px 10px;
+	padding: 10px 0px;
 	border: 0;
 	overflow: scroll;
 }
 
 textarea, textarea:focus-visible {
+	border: 1px solid #6998d0;
 	outline: none;
 	width: 320px;
-	border-radius: 15px 15px 0 0;
+	border-radius: 5px 5px 0 0;
 	min-height: 90px;
-	padding: 2px 10px;
+	padding: 4px 1px;
 	border: 0;
 	overflow: hidden;
 	resize: none;
@@ -44,12 +69,16 @@ textarea, textarea:focus-visible {
 #form{
 	display: flex;
 	flex-direction: column;
+	margin: 15px 0px;
+}
+
+#form button{
+	border-radius: 0 0 10px 10px;
 }
 
 button, button:focus {
 	background-color: #e6e6e6;
 	border: 0;
-	border-radius: 0 0 25px 25px;
 	padding: 8px;
 }
 
@@ -70,13 +99,38 @@ button, button:focus {
 	padding: 0 5px;
 }
 
+#BtnAutocompletar{
+	width: 100%;
+	font-family: "Poppins", sans-serif;
+	font-size: 14px;
+	border-radius: 5px;
+	margin: 2px;
+}
+
 span{
 	padding: 3px;
 	border-radius: 2px;
 }
 
+#idDataView h4{
+	margin: 5px;
+    border-radius: 7px;
+}
+
+#TextoProducto{
+	max-width: 80%;
+}
+
+#BtnProcesarProducto{
+	background-color: #6998d0;
+	border-radius: 5px;
+	color: #fff;
+	width: 85%;
+}
+
 h4{
+	font-family: "Poppins", sans-serif;
 	padding: 8px 4px;
-	background-color: #447cb4;
+	background-color: #6998d0;
 	box-shadow: inset -1px 3px 5px 1px #2c5e90;
 }

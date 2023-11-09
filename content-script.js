@@ -1,53 +1,118 @@
 // En el contenido del script
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // Procesar los datos recibidos desde la extensión
-  localStorage.setItem("Persona", JSON.stringify(request.data));
-  // Puedes enviar una respuesta de vuelta si es necesario
-  sendResponse({ response: "Datos recibidos correctamente" });
-});
+	localStorage.setItem("Persona", JSON.stringify(request.data))
+	localStorage.setItem("Vendedor", JSON.stringify(request.vendedor))
+	localStorage.setItem("ProductoComprado", JSON.stringify(request.ProductoComprado))
+	// Puedes enviar una respuesta de vuelta si es necesario
+	sendResponse({ response: "Datos recibidos correctamente" })
+})
 
-let Persona= localStorage.getItem("Persona")
-console.log(Persona);
+var NombreVendedor = localStorage.getItem("Vendedor")
+
+let Persona = JSON.parse(localStorage.getItem("Persona"))
+	? JSON.parse(localStorage.getItem("Persona"))
+	: Persona = {
+			Nombre: "",
+			Dni: "",
+			Departamento: "",
+			Direccion: "",
+			Provincia: "",
+			CodigoPostal: "",
+	  }
 
 const inputEvent = new KeyboardEvent("keyup", {
-    key: "*",
-    code: "NumpadMultiply", // Esto puede variar según la tecla y el navegador.
-    which: 56, // Valor ASCII para el asterisco (*).
-    keyCode: 56, // Valor ASCII para el asterisco (*).
-    bubbles: true
-  });
+	key: "*",
+	code: "NumpadMultiply",
+	which: 56,
+	keyCode: 56,
+	bubbles: true,
+})
 
 let InputNomComercial = document.getElementById("NomComercial")
 InputNomComercial.value = "CLIENTE MERCADO LIBRE CORDOBA *"
 InputNomComercial.dispatchEvent(inputEvent)
 
 
-var boton = document.querySelector('[onclick="javascript:CambiarDatosComerciales()"]')
-boton.addEventListener("click",function(){
-  document.querySelector("#DatosComerciales > table > tbody > tr:nth-child(1) > td:nth-child(2) > input").value=`${Persona.Nombre}`
+var boton = document.querySelector(
+	'[onclick="javascript:CambiarDatosComerciales()"]'
+)
+boton.addEventListener("click", function () {
+	setTimeout(function () {
+		document.querySelector(
+			"#DatosComerciales > table > tbody > tr:nth-child(1) > td:nth-child(2) > input"
+		).value = `${Persona.Nombre}`
+		document.querySelector(
+			"#DatosComerciales > table > tbody > tr:nth-child(2) > td:nth-child(2) > input"
+		).value = `${Persona.Direccion}`
+		document.querySelector(
+			"#DatosComerciales > table > tbody > tr:nth-child(3) > td:nth-child(2) > input"
+		).value = `${Persona.Departamento}`
+
+		var ProvinciaInputComerciales =
+			document.querySelector("#CamProvComercial")
+		ProvinciaInputComerciales.value = `${Persona.Provincia}`
+		var OpcionesProvincia = Array.from(ProvinciaInputComerciales.options)
+		OpcionesProvincia.map((opcion) => {
+			if (opcion.innerText.toLowerCase() ==	Persona.Provincia.toLowerCase()) {
+				let index = OpcionesProvincia.indexOf(opcion)
+				ProvinciaInputComerciales.selectedIndex = index
+			}
+		})
+  		SetearVendedor()
+		SetearProducto()
+		SetearPrecio()
+		document.querySelector(
+			"#DatosComerciales > table > tbody > tr:nth-child(5) > td:nth-child(2) > input"
+		).value = `${Persona.CodigoPostal}`
+		document.querySelector("#DatosComerciales > table > tbody > tr:nth-child(8) > td:nth-child(2) > input").value=`${Persona.Dni}`
+	}, 400)
 })
-  //     setTimeout(function(){
-//         var NombreInputComerciales= document.querySelector('[name="CamNomComercial"]');
-//         NombreInputComerciales.value=`${Persona.Nombre}`
-//         var DireccionInputComerciales=document.querySelector('[name="CamDirComercial"]');
-//         DireccionInputComerciales.value=`${Persona.Direccion}`
-//         var LocalidadInputComerciales=document.querySelector('[name="CamLocComercial"]');
-//         LocalidadInputComerciales.value=`${Persona.Departamento}`
-//         var ProvinciaInputComerciales=document.getElementById('CamProvComercial');
-//         var OpcionesProvincia=Array.from(ProvinciaInputComerciales.options)
-//         OpcionesProvincia.map(opcion=>{
-//             if(opcion.innerText.toLowerCase() == Persona.Provincia.toLowerCase()){
-//                     let index=OpcionesProvincia.indexOf(opcion);
-//                     console.log(index)
-//                     ProvinciaInputComerciales.selectedIndex=0
-//                 }
-//             }
-//         )
-//         // array.forEach(element => {
-            
-//         // });
-//         ProvinciaInputComerciales.value=`${Persona.Provincia}`
-//         // var CPostalInputComerciales=document.querySelector('[name="CamCPComercial"]');
-//         // CPostalInputComerciales.value=`${Persona.CodigoPostal}`
-//     },500)
-// })
+
+let Producto= localStorage.getItem("ProductoComprado") ? JSON.parse(localStorage.getItem("ProductoComprado")) : null
+function SetearProducto() {
+	document.querySelector("#TablaProductos_0 > tbody > tr:nth-child(2) > td:nth-child(1) > input:nth-child(5)").value = `${Producto.sku}`
+	var eventoChange = new Event("change");
+	document.querySelector("#TablaProductos_0 > tbody > tr:nth-child(2) > td:nth-child(1) > input:nth-child(5)").dispatchEvent(eventoChange);
+	setTimeout(async function () {
+		let contenedor=await document.querySelector("#TablaProductos_0 > tbody > tr:nth-child(2) > td:nth-child(3) > input")
+		contenedor.value = `${Producto.unidades}`
+	},1500)
+}
+
+
+function SetearVendedor() {
+  let opciones= Array.from(document.querySelector("#NomEmpleado").options)
+  opciones.map((opcion) => {
+    var t = opcion.innerText.toLowerCase()
+    var te= NombreVendedor.toLowerCase().toString()
+    te=te.split('"').join('')
+
+    if (t.includes(te)){
+      let index = opciones.indexOf(opcion)
+      document.querySelector("#NomEmpleado").selectedIndex = index
+    }
+  })
+}
+
+
+function SetearPrecio(){
+	document.querySelector("#FC_NroCtaBanco\\[\\]").value="MERCPCOR"
+
+	var fechaActual = new Date();
+	var dia = fechaActual.getDate();
+	var mes = fechaActual.getMonth() + 1; // Ten en cuenta que los meses comienzan desde 0
+	var año = fechaActual.getFullYear();
+
+	// Añadir un cero delante del día y mes si son menores que 10
+	dia = dia < 10 ? '0' + dia : dia;
+	mes = mes < 10 ? '0' + mes : mes;
+
+	var fechaFormateada = dia + '/' + mes + '/' + año;
+
+	document.querySelector("#FC_FechaTransferencia\\[\\]").value = fechaFormateada
+
+	setTimeout(function () {
+		document.querySelector("#FC_MonTra\\[\\]").value=document.querySelector("#MontoTotal_0").value 
+	},2500)
+}

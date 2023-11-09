@@ -7,21 +7,47 @@ let Persona={
     Departamento:"",
 }
 
+let InputTextoAutocompletar = document.querySelector("#TextoCompilar");
 let text = document.getElementById("TextoCompilar");
 
 window.onload=()=>{
-    localStorage.getItem("text")?
-    text.value=localStorage.getItem("text")
-    :
-    ""
-}
+    localStorage.getItem("text")!=undefined?
+        text.value=localStorage.getItem("text")
+        :
+        ""
 
-text.addEventListener("keyup", ()=>{
-    localStorage.setItem("text",text.value)
+    localStorage.getItem("vendedor")!=undefined?
+        document.getElementById("NombreVendedor").value=localStorage.getItem("vendedor")
+        :
+        ""
+
+    localStorage.getItem("producto")!=undefined?
+        TextoProducto.value=localStorage.getItem("producto")
+        :
+        ""
+}   
+
+InputTextoAutocompletar.addEventListener("keyup", ()=>{
+    localStorage.setItem("text",InputTextoAutocompletar.value)
 })
 
+TextoProducto.addEventListener("keyup", ()=>{
+    localStorage.setItem("producto",TextoProducto.value)
+})
+
+var NombreVendedorInput= document.getElementById("NombreVendedor");
+NombreVendedorInput.addEventListener("keyup", ()=>{
+    localStorage.setItem("vendedor",NombreVendedorInput.value)
+})
+
+let ProductoComprado={
+    sku:"",
+    unidades:0
+}
+
+
 document.getElementById("BtnProcesar").addEventListener("click", ()=>{
-    text=text.value
+    text=localStorage.getItem("text")  
     let ResponseSpliteada=text.split(' ')
     let ElementoTipoCliente=document.getElementById("RCli")
     if(ResponseSpliteada.includes('cuit')){
@@ -30,12 +56,12 @@ document.getElementById("BtnProcesar").addEventListener("click", ()=>{
         ElementoTipoCliente.innerHTML="Factura Consumidor Final"
     }
     separarDatos(text);
+    separarProductos();
 })
 
 function separarDatos(text){
     let ResponseSpliteada=text.split('-')
     Persona.Nombre=ResponseSpliteada[0].trim()
-    
     Persona.Dni=ResponseSpliteada[1].match(/\d+(\.\d+)?/g)
     Persona.Dni=Persona.Dni[0]
 
@@ -70,14 +96,14 @@ function separarDatos(text){
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
         var activeTab = tabs[0];
         if (activeTab) {
-        chrome.tabs.sendMessage(activeTab.id, { data: Persona }, function(response) {
-            if (chrome.runtime.lastError) {
-             console.error(chrome.runtime.lastError);
-            } else {
-                // Manejar la respuesta si la hay
-                console.log(response);
-            }
-        });
+            chrome.tabs.sendMessage(activeTab.id, { data: Persona,  vendedor: NombreVendedorInput.value,ProductoComprado: ProductoComprado, }, function(response) {
+                if (chrome.runtime.lastError) {
+                console.error(chrome.runtime.lastError);
+                } else {
+                    // Manejar la respuesta si la hay
+                    console.log(response);
+                }
+            });
         } else {
             console.error("No se encontró una pestaña activa.");
         }
@@ -85,6 +111,16 @@ function separarDatos(text){
 
     localStorage.setItem("Persona",JSON.stringify(Persona))
     MostrarDatos(Persona);    
+}
+
+
+function separarProductos(){
+    let TextoProducto=document.getElementById("TextoProducto").value;
+    // TextoProducto=TextoProducto.match('^[a-zA-Z]+$')
+    TextoProducto=TextoProducto.split('-');
+    ProductoComprado.sku=TextoProducto[0].replace(/\D/g, '').trim();
+    ProductoComprado.unidades=TextoProducto[1].trim();
+    
 }
 
 function MostrarDatos(Persona){
@@ -95,3 +131,4 @@ function MostrarDatos(Persona){
     document.getElementById("Provincia").innerHTML=Persona.Provincia
     document.getElementById("CodigoPostal").innerHTML=Persona.CodigoPostal    
 }
+
