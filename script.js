@@ -60,38 +60,33 @@ document.getElementById("BtnProcesar").addEventListener("click", ()=>{
 })
 
 function separarDatos(text){
-    let ResponseSpliteada=text.split('-')
-    Persona.Nombre=ResponseSpliteada[0].trim()
-    Persona.Dni=ResponseSpliteada[1].match(/\d+(\.\d+)?/g)
-    Persona.Dni=Persona.Dni[0]
-
-    let DireccionStr=ResponseSpliteada[2].trim()
-    DireccionStr=DireccionStr.split(',')
-    Persona.Departamento=DireccionStr[1].trim()
-    DireccionStr=DireccionStr[0].split(' ')
-    let CadenaLimpia=""
-    DireccionStr.forEach(palabra => {
-        if(!CadenaLimpia.includes(palabra)){
-            CadenaLimpia=CadenaLimpia+' '+palabra
-        }
-    });
-    Persona.Direccion=CadenaLimpia.trim();
-
-    let Provincia=ResponseSpliteada[3].trim()
-    Provincia=Provincia.split(',')
-    let CodigoPostal=Provincia[0].split(':')
-    Provincia=Provincia[1].split(" ")
-    CadenaLimpia=""
-    Provincia.forEach(palabra => {
-        if(!palabra.includes("Final") || !palabra.includes("Consumidor")){
-            CadenaLimpia=CadenaLimpia+' '+palabra
-        }
-    })
-    Persona.Provincia=CadenaLimpia.trim();
     
-    CodigoPostal=CodigoPostal[1].trim()
-    Persona.CodigoPostal=CodigoPostal
-    
+    let TxtUsuario=text.split('-')
+
+    let Dni = TxtUsuario[1].trim().split(' ')
+    Dni=Dni.splice(0,2)[1]
+    Persona.Dni= Dni.replace(/\n/g, ' ').split(' ')[0];
+
+
+    Persona.Nombre=TxtUsuario[0].trim()
+
+    let DireccionAux=TxtUsuario[1].trim().split(',')[0].split(' ')[1].replace(/\d/g, ' ').trim()
+    let Direccion=TxtUsuario[1].trim().split(',')[0].split(' ')
+    Direccion[1]=DireccionAux
+    Persona.Direccion=Direccion.slice(1).join(' ')
+
+    let Provincia= TxtUsuario[2].split(',').slice(1)[0].trim()
+    Provincia= Provincia.replace(/\n/g, ' ').split(' ').slice(0,2).join(' ')
+
+    Persona.Provincia=Provincia
+
+    let CodigoPostal= TxtUsuario[2].split(',').slice(0)[0].trim().split(':')[1].trim()
+
+    Persona.CodigoPostal=CodigoPostal;
+
+    let Departamento= TxtUsuario[1].split(',')
+    Persona.Departamento=Departamento[1].trim().toLowerCase()
+
     // En el script de la extensión (fondo)
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
         var activeTab = tabs[0];
