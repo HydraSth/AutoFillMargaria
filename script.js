@@ -67,7 +67,6 @@ function separarDatos(text){
     Dni=Dni.splice(0,2)[1]
     Persona.Dni= Dni.replace(/\n/g, ' ').split(' ')[0];
 
-
     Persona.Nombre=TxtUsuario[0].trim()
 
     let DireccionAux=TxtUsuario[1].trim().split(',')[0].split(' ')[1].replace(/\d/g, ' ').trim()

@@ -1,3 +1,5 @@
+alert("Ejecutandose")
+
 // En el contenido del script
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // Procesar los datos recibidos desde la extensión
@@ -30,7 +32,7 @@ const inputEvent = new KeyboardEvent("keyup", {
 })
 
 let InputNomComercial = document.getElementById("NomComercial")
-InputNomComercial.value = "CLIENTE MERCADO LIBRE CORDOBA *"
+InputNomComercial.value = "MERCADOLIBRE GIL *"
 InputNomComercial.dispatchEvent(inputEvent)
 
 
