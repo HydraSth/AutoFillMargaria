@@ -5,6 +5,7 @@ let Persona={
     Provincia:"",
     CodigoPostal:"",    
     Departamento:"",
+    TipoDePersona:""
 }
 
 let InputTextoAutocompletar = document.querySelector("#TextoCompilar");
@@ -48,13 +49,6 @@ let ProductoComprado={
 
 document.getElementById("BtnProcesar").addEventListener("click", ()=>{
     text=localStorage.getItem("text")  
-    let ResponseSpliteada=text.split(' ')
-    let ElementoTipoCliente=document.getElementById("RCli")
-    if(ResponseSpliteada.includes('cuit')){
-        ElementoTipoCliente.innerHTML="Factura Empresa"
-    }else{
-        ElementoTipoCliente.innerHTML="Factura Consumidor Final"
-    }
     separarDatos(text);
     separarProductos();
 })
@@ -103,6 +97,20 @@ function separarDatos(text){
         }
     });
 
+    let EvaluarTxtUsuario=text.toLowerCase()
+    if(EvaluarTxtUsuario.includes('cuit')){
+        if(EvaluarTxtUsuario.includes('exento')){
+            Persona.TipoDePersona="Exento"
+        }else if(EvaluarTxtUsuario.includes('monotributo')){
+            Persona.TipoDePersona="Monotributo"
+        }else if(EvaluarTxtUsuario.includes('responsable inscripto')){
+            Persona.TipoDePersona="Responsable Inscripto"
+        }else{
+            Persona.TipoDePersona="Consumidor Final"
+        }
+    }else{
+        Persona.TipoDePersona="Consumidor Final"
+    }
     localStorage.setItem("Persona",JSON.stringify(Persona))
     MostrarDatos(Persona);    
 }
@@ -125,6 +133,7 @@ function MostrarDatos(Persona){
     document.getElementById("Departamento").innerHTML=Persona.Departamento
     document.getElementById("Direccion").innerHTML=Persona.Direccion
     document.getElementById("Provincia").innerHTML=Persona.Provincia
-    document.getElementById("CodigoPostal").innerHTML=Persona.CodigoPostal    
+    document.getElementById("CodigoPostal").innerHTML=Persona.CodigoPostal   
+    document.getElementById("TipoDeFactura").innerHTML=Persona.TipoDePersona 
 }
 

@@ -4,6 +4,7 @@ body {
 	font-family: "Poppins", sans-serif;
 	margin: 0;
 	padding: 15px;
+	width: 350px;
 	font-family: sans-serif;
 	background: #82b2e2;
 	color: white;
@@ -29,24 +30,18 @@ button:hover{
 	font-size: 12.5px;
 }
 
-#MainContainer{
-	display: flex;
-
-}
-
 #Producto{
-	margin-right: 30px;
-	background-color: #fff;
-	border-radius: 5px;
-	color: #2c5e90;
-	text-align: center;
-    padding: 0;
-
-	background-image: url("./chibi-bg.png");
+    height: 72px;
+    background-color: #fff;
+    border-radius: 5px;
+    color: #2c5e90;
+    text-align: center;
+    padding: 2px 0px;
+	/* background-image: url("./chibi-bg.png");
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-blend-mode: multiply;
-	background-position: right;
+	background-position: right; */
 }
 
 #Producto h2{
@@ -55,28 +50,26 @@ button:hover{
 
 input, input:focus-visible {
     outline: none;
-	border-radius: 25px;
+    border-radius: 5px;
 	padding: 10px 0px;
 	border: 0;
 	overflow: scroll;
 }
 
 textarea, textarea:focus-visible {
-	border: 1px solid #6998d0;
-	outline: none;
-	width: 320px;
-	border-radius: 5px 5px 0 0;
-	min-height: 90px;
-	padding: 4px 1px;
-	border: 0;
-	overflow: hidden;
-	resize: none;
+    outline: none;
+    border-radius: 5px 5px 0 0;
+    min-height: 90px;
+    padding: 4px 4px;
+    border: 0;
+    overflow: hidden;
+    resize: none;
 }
 
 #form{
-	display: flex;
-	flex-direction: column;
-	margin: 15px 0px;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0px;
 }
 
 #form button{
@@ -94,16 +87,6 @@ button, button:focus {
 	justify-content: center;
 	flex-direction: column;
 	align-items: center; 
-}
-
-#RCli{
-	text-align: center;
-	background-color: #447cb4;
-	border-radius: 25px;
-	margin: 0;
-	font-size: 16px;
-	width: 245px;
-	padding: 0 5px;
 }
 
 #BtnAutocompletar{

@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Autocompletado Margaria</title>
-    <link rel="stylesheet" href="estilos.css">    
+    <link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
-    <section id="MainContainer">
+
+    <section id="container">
+        <div class="center">
+            <input id="NombreVendedor" placeholder="Vendedor" />
+        </div>
         <section id="Producto">
             <h2>Producto</h2>
-            <textarea placeholder="Ingrese texto del producto" id="TextoProducto" rows="4" cols="35"></textarea>
+            <input placeholder="Ingrese texto del producto" id="TextoProducto"></input>
         </section>
-        <section id="container">
-            <div class="center">
-                <input id="NombreVendedor" placeholder="Vendedor"/>
-                <h5 id="RCli"></h5>
-            </div>
-            <div action="" id="form">
-                    <textarea placeholder="Texto para autocompletado recuerde separar los datos con guiones" id="TextoCompilar" rows="4" cols="35"></textarea>
-                    <button id="BtnProcesar">Procesar</button>
-                    <div id="result"></div>
-            </div>
-            <div id="idDataView">
-                <h4>Nombre: <span id="Nombre"></span></h4>
-                <h4>Dni: <span id="Dni"></span></h4>
-                <h4>Departamento: <span id="Departamento"></span></h4>
-                <h4>Direccion: <span id="Direccion"></span></h4>
-                <h4>Provincia: <span id="Provincia"></span></h4>
-                <h4>CodigoPostal: <span id="CodigoPostal"></span></h4>
-            </div>
-            <!-- <button id="BtnAutocompletar">Autocompletar</button> -->
-        </section>
+        <div action="" id="form">
+            <textarea placeholder="Texto para autocompletado recuerde separar los datos con guiones" id="TextoCompilar"
+                rows="4" cols="35"></textarea>
+            <button id="BtnProcesar">Procesar</button>
+            <div id="result"></div>
+        </div>
+        <div id="idDataView">
+            <h4>Nombre: <span id="Nombre"></span></h4>
+            <h4>Dni: <span id="Dni"></span></h4>
+            <h4>Departamento: <span id="Departamento"></span></h4>
+            <h4>Direccion: <span id="Direccion"></span></h4>
+            <h4>Provincia: <span id="Provincia"></span></h4>
+            <h4>CodigoPostal: <span id="CodigoPostal"></span></h4>
+            <h4>Tipo de factura: <span id="TipoDeFactura"></span></h4>
+        </div>
     </section>
     <script src="script.js">
     </script>
 </body>
-</html>
 
+</html>

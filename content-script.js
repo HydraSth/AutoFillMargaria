@@ -59,6 +59,18 @@ boton.addEventListener("click", function () {
 				ProvinciaInputComerciales.selectedIndex = index
 			}
 		})
+
+		
+		let TipoDePersona =document.querySelector("#DatosComerciales > table > tbody > tr:nth-child(7) > td:nth-child(2) > select")
+		TipoDePersona.value = `${Persona.TipoDePersona}`
+		var OpcionesPersona = Array.from(TipoDePersona.options)
+		OpcionesPersona.map((opcion) => {
+			if (opcion.innerText.toLowerCase() ==	Persona.TipoDePersona.toLowerCase()) {
+				let index = OpcionesPersona.indexOf(opcion)
+				TipoDePersona.selectedIndex = index
+			}
+		})
+
   		SetearVendedor()
 		SetearProducto()
 		SetearPrecio()
