@@ -1,4 +1,3 @@
-alert("Ejecutandose")
 
 // En el contenido del script
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -99,7 +98,7 @@ function SetearVendedor() {
 
 
 function SetearPrecio(){
-	document.querySelector("#FC_NroCtaBanco\\[\\]").value="MERCPCOR"
+	document.querySelector("#FC_NroCtaBanco\\[\\]").value="ML133456"
 
 	var fechaActual = new Date();
 	var dia = fechaActual.getDate();
