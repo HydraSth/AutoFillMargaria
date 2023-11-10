@@ -41,13 +41,11 @@ button:hover{
 	color: #2c5e90;
 	text-align: center;
     padding: 0;
-
-	/* background-image: url("./chibi-bg.png");
+	background-image: url("./chibi-bg.png");
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-blend-mode: multiply;
-	background-position: right; */
-	
+	background-position: right;
 }
 
 #Producto h2{
