@@ -1,4 +1,3 @@
-
 // En el contenido del script
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // Procesar los datos recibidos desde la extensión
@@ -31,7 +30,7 @@ const inputEvent = new KeyboardEvent("keyup", {
 })
 
 let InputNomComercial = document.getElementById("NomComercial")
-InputNomComercial.value = "MERCADOLIBRE GIL *"
+InputNomComercial.value = "MERCADOLIBRE CORDOBA *"
 InputNomComercial.dispatchEvent(inputEvent)
 
 
@@ -98,7 +97,7 @@ function SetearVendedor() {
 
 
 function SetearPrecio(){
-	document.querySelector("#FC_NroCtaBanco\\[\\]").value="ML133456"
+	document.querySelector("#FC_NroCtaBanco\\[\\]").value="MERCPCOR"
 
 	var fechaActual = new Date();
 	var dia = fechaActual.getDate();

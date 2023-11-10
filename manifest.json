@@ -6,7 +6,7 @@
   "permissions": ["activeTab"],
   "content_scripts": [
 	{
-	  "matches": ["https://central.gestionnik.com/Forms/Procesos/ComprVenta.php?TipoComp=FV"],
+	  "matches": ["https://margarianeumaticos.gestionnik.com/Forms/Procesos/ComprVenta.php?TipoComp=FV"],
 	  "js": ["content-script.js"]
 	}
   ],
