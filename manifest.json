@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "App autocompletado",
-  "description": "Esta app ayuda al programa de Guillermo",
-  "version": "0.01",
+  "name": "Autocompletado Fac",
+  "description": "Extension desarrolada JC.",
+  "version": "1.0",
   "permissions": ["activeTab"],
   "content_scripts": [
 	{
