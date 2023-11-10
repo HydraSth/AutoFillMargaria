@@ -97,7 +97,7 @@ function SetearVendedor() {
 
 
 function SetearPrecio(){
-	document.querySelector("#FC_NroCtaBanco\\[\\]").value="MERCPCOR"
+	document.querySelector("#FC_NroCtaBanco\\[\\]").value="ML133456"
 
 	var fechaActual = new Date();
 	var dia = fechaActual.getDate();
@@ -113,6 +113,6 @@ function SetearPrecio(){
 	document.querySelector("#FC_FechaTransferencia\\[\\]").value = fechaFormateada
 
 	setTimeout(function () {
-		document.querySelector("#FC_MonTra\\[\\]").value=document.querySelector("#MontoTotal_0").value 
+		document.querySelector("#FC_MonTra\\[\\]").value= Producto.precio ? Producto.precio: document.querySelector("#MontoTotal_0").value
 	},2500)
 }

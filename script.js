@@ -114,7 +114,9 @@ function separarProductos(){
     TextoProducto=TextoProducto.split('-');
     ProductoComprado.sku=TextoProducto[0].replace(/\D/g, '').trim();
     ProductoComprado.unidades=TextoProducto[1].trim();
-    
+    if(TextoProducto[2]){
+        ProductoComprado.precio=TextoProducto[2].replace(/\D/g, '').trim();
+    }
 }
 
 function MostrarDatos(Persona){
