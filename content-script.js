@@ -1,5 +1,3 @@
-alert("Ejecutandose")
-
 // En el contenido del script
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // Procesar los datos recibidos desde la extensión
